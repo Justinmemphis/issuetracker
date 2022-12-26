@@ -5,6 +5,7 @@ Tracking
 - got database connection working
 - add database schema
 - fix tabs and minor formatting
+- add post function to add new issue to database
 
 12/14/22:
 - setup initial files
