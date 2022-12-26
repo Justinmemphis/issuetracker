@@ -14,7 +14,7 @@ mongoose.connect(`mongodb+srv://${user}:${password}@${server}`, { useNewUrlParse
 
 const Schema = mongoose.Schema;
 
-const projectSchema = new Schema({
+const ProjectSchema = new Schema({
 	issue_title: { type: String, required: true },
 	issue_text: { type: String, required: true},
 	created_by: { type: String, required: true},
@@ -26,28 +26,31 @@ const projectSchema = new Schema({
 	
 });
 
+const Project = new mongoose.model('Project', ProjectSchema);
+
 module.exports = function (app) {
 
-  app.route('/api/issues/:project')
+	app.route('/api/issues/:project')
   
-    .get(function (req, res){
-      let project = req.params.project;
+		.get(function (req, res){
+			let project = req.params.project;
       
-    })
+		});
     
-    .post(function (req, res){
-      let project = req.params.project;
+		.post(function (req, res){
+			let project = req.params.project;
+
       
-    })
+		});
     
-    .put(function (req, res){
-      let project = req.params.project;
+		.put(function (req, res){
+			let project = req.params.project;
       
-    })
+		});
     
-    .delete(function (req, res){
-      let project = req.params.project;
+		.delete(function (req, res){
+			let project = req.params.project;
       
-    });
+		});
     
 };

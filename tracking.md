@@ -4,6 +4,7 @@ Tracking
 12/26/22:
 - got database connection working
 - add database schema
+- fix tabs and minor formatting
 
 12/14/22:
 - setup initial files
