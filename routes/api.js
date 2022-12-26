@@ -1,10 +1,12 @@
 'use strict';
 const mongoose = require('mongoose');
-const user = process.env.user;
-const password = process.env.password;
-const server = process.env.server;
+const user = process.env.MONGO_USER;
+const password = process.env.MONGO_PASSWORD;
+const server = process.env.SERVER;
+const uri = process.env.URI;
 
 mongoose.set('strictQuery', false);
+console.log('user, password, server: ',user,password,server);
 
 mongoose.connect(`mongodb+srv://${user}:${password}@${server}`, { useNewUrlParser: true, useUnifiedTopology: true})
 	.then( () => console.log('MongoDB Connected...'))

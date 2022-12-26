@@ -1,6 +1,9 @@
 Issue Tracker
 Tracking
 
+12/26/22:
+- got database connection working
+
 12/14/22:
 - setup initial files
 - it appears we will need to connect to a database to get/post/put/delete issues - will setup MongoDB
