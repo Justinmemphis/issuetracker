@@ -1,10 +1,11 @@
 Issue Tracker
 Tracking
 
-12/27/22:
-- post function added yesterday appears to be working correctly
+12/28/22:
+- post function added last time appears to be working correctly
 - realized today I need issues to have a 'project' field showing which project they are for
 - added project property to post function and document schema
+- added basic get function to retrieve all issues for a project - and to test for no project error condition
 
 12/26/22:
 - got database connection working

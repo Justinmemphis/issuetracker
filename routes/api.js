@@ -38,11 +38,26 @@ module.exports = function (app) {
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
+			let projectString = JSON.stringify(req.params.project);
+			console.log('projectString1: ',projectString);
 			try {
-				
+				// first - find if there is a project or not -> then filter list if there is a project
+				const results = await Issue.find({project:projectString});
+				console.log('got this far');
+				console.log(results);
+				if (results == '') {
+					res.json({
+						error: 'no project found with that name'
+					});
+				} else {
+					res.send(results);
+				};
 			} catch (err) {
+				console.log('Error - catch block');
+				res.json({
+					error: 'invalid input'
+				});
 			}
-      
 		})
     
 		.post(async (req, res) => {
@@ -52,7 +67,7 @@ module.exports = function (app) {
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
 			let projectString = JSON.stringify(req.params.project);
-			console.log('projectString: ',projectString);
+			console.log('projectString2: ',projectString);
 			const newIssue = new Issue({
 				issue_title: req.body.issue_title,
 				issue_text: req.body.issue_text,
