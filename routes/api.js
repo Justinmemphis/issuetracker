@@ -21,7 +21,8 @@ const IssueSchema = new Schema({
 	status_text: { type: String},
 	created_on: { type: Date},
 	updated_on: { type: Date},
-	open: { type: Boolean}
+	open: { type: Boolean},
+	project: { type: String, required: true}
 	
 });
 
@@ -31,17 +32,27 @@ module.exports = function (app) {
 
 	app.route('/api/issues/:project')
   
-		.get(function (req, res){
-			let project = req.params.project;
-      
-		})
-    
-		.post( async (req, res) => {
+		.get(async (req, res) => {
 			let project = req.params.project;
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
+			try {
+				
+			} catch (err) {
+			}
+      
+		})
+    
+		.post(async (req, res) => {
+			let project = req.params.project;
+			console.log('req.params.project: ',req.params.project);
+			console.log('req.params: ',req.params);
+			console.log('req.query: ',req.query);
+			console.log('req.body: ',req.body);
+			let projectString = JSON.stringify(req.params.project);
+			console.log('projectString: ',projectString);
 			const newIssue = new Issue({
 				issue_title: req.body.issue_title,
 				issue_text: req.body.issue_text,
@@ -50,10 +61,11 @@ module.exports = function (app) {
 				status_text: req.body.status_text,
 				open: 'true',
 				created_on: new Date(),
-				updated_on: new Date()
+				updated_on: new Date(),
+				project: projectString
 			});
-			console.log('newIssue is: ',newIssue);
 			await newIssue.save();
+			console.log('newIssue is: ',newIssue);
 			return res.json({
 				'_id': newIssue._id,
 				'issue_title': newIssue.issue_title,
@@ -63,7 +75,8 @@ module.exports = function (app) {
 				'status_text': newIssue.status_text,
 				'created_on': newIssue.created_on,
 				'updated_on': newIssue.updated_on,
-				'open': newIssue.open
+				'open': newIssue.open,
+				'project': newIssue.project
 			});
 		})
     
