@@ -1,6 +1,19 @@
 Issue Tracker
 Tracking
 
+12/29/22:
+- changed get function to handle filters (individual or multiple) 
+Tomorrow - 
+
+Plan for buiild:
+12/29 - finish get function - handle queries
+12/29 - build put function
+12/30 - build delete function
+01/02 - create 'create' tests
+01/03 - create 'view' tests
+01/04 - create 'update' tests
+01/05 - create 'delete' tests
+
 12/28/22:
 - post function added last time appears to be working correctly
 - realized today I need issues to have a 'project' field showing which project they are for

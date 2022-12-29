@@ -34,16 +34,26 @@ module.exports = function (app) {
   
 		.get(async (req, res) => {
 			let project = req.params.project;
+			/*
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
+			*/
 			let projectString = JSON.stringify(req.params.project);
-			console.log('projectString1: ',projectString);
+			// console.log('projectString1: ',projectString);
 			try {
-				// first - find if there is a project or not -> then filter list if there is a project
-				const results = await Issue.find({project:projectString});
-				console.log('got this far');
+				const results = await Issue.find({
+					project:projectString,
+					...req.query.issue_title ? { issue_title: req.query.issue_title } : {},
+					...req.query.issue_text ? { issue_text: req.query.issue_text } : {},
+					...req.query.created_by ? { created_by: req.query.created_by } : {},
+					...req.query.assigned_to ? { assigned_to: req.query.assigned_to } : {},
+					...req.query.status_text ? { status_text: req.query.status_text } : {},
+					...req.query.created_on ? { created_on: req.query.created_on } : {},
+					...req.query.updated_on ? { updated_on: req.query.updated_on } : {},
+					...req.query.open ? { open: req.query.open } : {}
+				});
 				console.log(results);
 				if (results == '') {
 					res.json({
@@ -62,12 +72,14 @@ module.exports = function (app) {
     
 		.post(async (req, res) => {
 			let project = req.params.project;
+			/*
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
+			*/
 			let projectString = JSON.stringify(req.params.project);
-			console.log('projectString2: ',projectString);
+			// console.log('projectString2: ',projectString);
 			const newIssue = new Issue({
 				issue_title: req.body.issue_title,
 				issue_text: req.body.issue_text,
