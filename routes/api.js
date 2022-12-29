@@ -52,7 +52,8 @@ module.exports = function (app) {
 					...req.query.status_text ? { status_text: req.query.status_text } : {},
 					...req.query.created_on ? { created_on: req.query.created_on } : {},
 					...req.query.updated_on ? { updated_on: req.query.updated_on } : {},
-					...req.query.open ? { open: req.query.open } : {}
+					...req.query.open ? { open: req.query.open } : {},
+					...req.query._id ? { _id: req.query._id } : {}
 				});
 				console.log(results);
 				if (results == '') {
@@ -107,8 +108,38 @@ module.exports = function (app) {
 			});
 		})
     
-		.put(function (req, res){
+		.put(async (req, res) => {
 			let project = req.params.project;
+			
+			console.log('req.params.project: ',req.params.project);
+			console.log('req.params: ',req.params);
+			console.log('req.query: ',req.query);
+			console.log('req.body: ',req.body);
+			
+			let projectString = JSON.stringify(req.params.project);
+			console.log('projectString3: ',projectString);
+			try {
+				const results = await Issue.updateOne({ _id: req.body._id }, {
+							...req.query.issue_title ? { issue_title: req.query.issue_title } : {},
+							...req.query.issue_text ? { issue_text: req.query.issue_text } : {},
+							...req.body.created_by ? { created_by: req.body.created_by } : {},
+							...req.query.assigned_to ? { assigned_to: req.query.assigned_to } : {},
+							...req.query.status_text ? { status_text: req.query.status_text } : {}
+					});
+				console.log(results);
+				if (results == '') {
+					res.json({
+						error: 'no project found with that id and filters'
+					});
+				} else {
+					res.send(results);
+				};
+			} catch (err) {
+				console.log('Error - catch block');
+				res.json({
+					error: 'invalid input'
+				});
+			}
       
 		})
     

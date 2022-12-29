@@ -3,11 +3,12 @@ Tracking
 
 12/29/22:
 - changed get function to handle filters (individual or multiple) 
-Tomorrow - 
+- create put function to update issues
+Tomorrow - create build function
 
 Plan for buiild:
-12/29 - finish get function - handle queries
-12/29 - build put function
+~~12/29 - finish get function - handle queries~~
+~~12/29 - build put function~~
 12/30 - build delete function
 01/02 - create 'create' tests
 01/03 - create 'view' tests
