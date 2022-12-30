@@ -21,7 +21,7 @@ const IssueSchema = new Schema({
 	status_text: { type: String},
 	created_on: { type: Date},
 	updated_on: { type: Date},
-	open: { type: Boolean},
+	open: { type: Boolean, default: true},
 	project: { type: String, required: true}
 	
 });
@@ -73,39 +73,46 @@ module.exports = function (app) {
     
 		.post(async (req, res) => {
 			let project = req.params.project;
-			/*
+		
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
-			*/
+		
 			let projectString = JSON.stringify(req.params.project);
-			// console.log('projectString2: ',projectString);
-			const newIssue = new Issue({
-				issue_title: req.body.issue_title,
-				issue_text: req.body.issue_text,
-				created_by: req.body.created_by,
-				assigned_to: req.body.assigned_to,
-				status_text: req.body.status_text,
-				open: 'true',
-				created_on: new Date(),
-				updated_on: new Date(),
-				project: projectString
-			});
-			await newIssue.save();
-			console.log('newIssue is: ',newIssue);
-			return res.json({
-				'_id': newIssue._id,
-				'issue_title': newIssue.issue_title,
-				'issue_text': newIssue.issue_text,
-				'created_by': newIssue.created_by,
-				'assigned_to': newIssue.assigned_to,
-				'status_text': newIssue.status_text,
-				'created_on': newIssue.created_on,
-				'updated_on': newIssue.updated_on,
-				'open': newIssue.open,
-				'project': newIssue.project
-			});
+			console.log('projectString2: ',projectString);
+			
+			try {
+				const newIssue = new Issue({
+					issue_title: req.body.issue_title,
+					issue_text: req.body.issue_text,
+					created_by: req.body.created_by,
+					assigned_to: req.body.assigned_to || '',
+					status_text: req.body.status_text || '',
+					created_on: new Date(),
+					updated_on: new Date(),
+					project: projectString
+				});
+				await newIssue.save();
+				console.log('newIssue is: ',newIssue);
+				return res.json({
+					'_id': newIssue._id,
+					'issue_title': newIssue.issue_title,
+					'issue_text': newIssue.issue_text,
+					'created_by': newIssue.created_by,
+					'assigned_to': newIssue.assigned_to,
+					'status_text': newIssue.status_text,
+					'created_on': newIssue.created_on,
+					'updated_on': newIssue.updated_on,
+					'open': newIssue.open,
+					'project': newIssue.project
+				});
+			} catch (err) {
+				console.log('Error - catch block');
+				res.json({
+					error: 'required field(s) missing'
+				});
+			}
 		})
     
 		.put(async (req, res) => {
