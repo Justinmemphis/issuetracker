@@ -1,6 +1,9 @@
 Issue Tracker
 Tracking
 
+12/30/22:
+- add delete function to delete an issue
+
 12/29/22:
 - changed get function to handle filters (individual or multiple) 
 - create put function to update issues
