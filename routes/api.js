@@ -117,14 +117,14 @@ module.exports = function (app) {
     
 		.put(async (req, res) => {
 			let project = req.params.project;
-			/*	
+				
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
-		 	*/	
+		 		
 			let projectString = JSON.stringify(req.params.project);
-			//console.log('projectString3: ',projectString);
+			console.log('projectString3: ',projectString);
 			try {
 				const results = await Issue.updateOne({ _id: req.body._id }, {
 						...req.query.issue_title ? { issue_title: req.query.issue_title } : {},
@@ -134,13 +134,7 @@ module.exports = function (app) {
 						...req.query.status_text ? { status_text: req.query.status_text } : {}
 					});
 				console.log(results);
-				if (results == '') {
-					res.json({
-						error: 'no project found with that id and filters'
-					});
-				} else {
-					res.send(results);
-				};
+				res.send(results);
 			} catch (err) {
 				console.log('Error - catch block');
 				res.json({

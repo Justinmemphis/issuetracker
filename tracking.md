@@ -6,6 +6,7 @@ Tracking
 - put version on replit to see how it is doing with FCC tests.  See results below:
 - based on the FCC test input, there are significant changes to be made to the functions and responses, will proceed to work down the list
 - fix outstanding PUT request issues (based on FCC)
+Tomorrow - fix outstanding issues related to PUT and DELETE
 
 Passed: You can provide your own project, not the example URL.
 Passed: You can send a POST request to /api/issues/{projectname} with form data containing the required fields issue_title, issue_text, created_by, and optionally assigned_to and status_text.
