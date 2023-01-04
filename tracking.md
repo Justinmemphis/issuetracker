@@ -7,6 +7,7 @@ Tracking
 - fix typo
 - see new replit test with FCC below
 - update error handling on DELETE function
+- four tests below still failing - investigate more tomorrow
 
 
 Failed: You can send a PUT request to /api/issues/{projectname} with an _id and one or more fields to update. On success, the updated_on field should be updated, and returned should be {  result: 'successfully updated', '_id': _id }.
