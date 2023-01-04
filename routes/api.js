@@ -81,38 +81,45 @@ module.exports = function (app) {
 		
 			let projectString = JSON.stringify(req.params.project);
 			console.log('projectString2: ',projectString);
-			
-			try {
-				const newIssue = new Issue({
-					issue_title: req.body.issue_title,
-					issue_text: req.body.issue_text,
-					created_by: req.body.created_by,
-					assigned_to: req.body.assigned_to || '',
-					status_text: req.body.status_text || '',
-					created_on: new Date(),
-					updated_on: new Date(),
-					project: projectString
-				});
-				await newIssue.save();
-				console.log('newIssue is: ',newIssue);
-				return res.json({
-					'_id': newIssue._id,
-					'issue_title': newIssue.issue_title,
-					'issue_text': newIssue.issue_text,
-					'created_by': newIssue.created_by,
-					'assigned_to': newIssue.assigned_to,
-					'status_text': newIssue.status_text,
-					'created_on': newIssue.created_on,
-					'updated_on': newIssue.updated_on,
-					'open': newIssue.open,
-					'project': newIssue.project
-				});
-			} catch (err) {
-				console.log('Error - catch block');
+
+			if (!req.body.issue_title || !req.body.issue_text || !req.body.created_by) {
 				res.json({
 					error: 'required field(s) missing'
 				});
+			} else {
+				try {
+					const newIssue = new Issue({
+						issue_title: req.body.issue_title,
+						issue_text: req.body.issue_text,
+						created_by: req.body.created_by,
+						assigned_to: req.body.assigned_to || '',
+						status_text: req.body.status_text || '',
+						created_on: new Date(),
+						updated_on: new Date(),
+						project: projectString
+					});
+					await newIssue.save();
+					console.log('newIssue is: ',newIssue);
+					return res.json({
+						'_id': newIssue._id,
+						'issue_title': newIssue.issue_title,
+						'issue_text': newIssue.issue_text,
+						'created_by': newIssue.created_by,
+						'assigned_to': newIssue.assigned_to,
+						'status_text': newIssue.status_text,
+						'created_on': newIssue.created_on,
+						'updated_on': newIssue.updated_on,
+						'open': newIssue.open,
+						'project': newIssue.project
+					});
+				} catch (err) {
+					console.log('Error - catch block');
+					res.json({
+						error: 'unknown erro'
+					});
+				}
 			}
+			
 		})
     
 		.put(async (req, res) => {

@@ -3,6 +3,7 @@ Tracking
 
 01/04/23:
 - update PUT request to have correct error handling
+- update POST request to use if/else for better error handling
 
 
 12/30/22:
