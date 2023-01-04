@@ -115,7 +115,7 @@ module.exports = function (app) {
 				} catch (err) {
 					console.log('Error - catch block');
 					res.json({
-						error: 'unknown erro'
+						error: 'unknown error'
 					});
 				}
 			}
