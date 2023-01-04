@@ -125,23 +125,41 @@ module.exports = function (app) {
 		 		
 			let projectString = JSON.stringify(req.params.project);
 			console.log('projectString3: ',projectString);
-			try {
-				const results = await Issue.updateOne({ _id: req.body._id }, {
-						...req.query.issue_title ? { issue_title: req.query.issue_title } : {},
-						...req.query.issue_text ? { issue_text: req.query.issue_text } : {},
-						...req.body.created_by ? { created_by: req.body.created_by } : {},
-						...req.query.assigned_to ? { assigned_to: req.query.assigned_to } : {},
-						...req.query.status_text ? { status_text: req.query.status_text } : {}
-					});
-				console.log(results);
-				res.send(results);
-			} catch (err) {
-				console.log('Error - catch block');
+			
+			if (!req.body._id) {
 				res.json({
-					error: 'invalid input'
+					error: 'missing _id'
 				});
-			}
+			} else if (!req.body.issue_title && 
+				!req.body.issue_text && 
+				!req.body.created_by && 
+				!req.body.assigned_to && 
+				!req.body.status_text) {
+
+				res.json({
+					error: `'no update field(s) sent', '_id': ${req.body._id}`
+				});
+			} else {
+				try {
+					const results = await Issue.updateOne({ _id: req.body._id }, {
+							...req.body.issue_title ? { issue_title: req.body.issue_title } : {},
+							...req.body.issue_text ? { issue_text: req.body.issue_text } : {},
+							...req.body.created_by ? { created_by: req.body.created_by } : {},
+							...req.body.assigned_to ? { assigned_to: req.body.assigned_to } : {},
+							...req.body.status_text ? { status_text: req.body.status_text } : {}
+					});
+					console.log(results);
+					res.json({
+						result: `successfully updated', '_id': ${req.body._id}`
+					});
+				} catch (err) {
+					console.log('Error - catch block');
+					res.json({
+						error: `'could not update', '_id': ${req.body._id}`
+					});
+				}
       
+			};
 		})
     
 		.delete(async (req, res) => {

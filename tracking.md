@@ -1,6 +1,10 @@
 Issue Tracker
 Tracking
 
+01/04/23:
+- update PUT request to have correct error handling
+
+
 12/30/22:
 - add delete function to delete an issue
 - put version on replit to see how it is doing with FCC tests.  See results below:
