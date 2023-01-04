@@ -153,7 +153,8 @@ module.exports = function (app) {
 							...req.body.issue_text ? { issue_text: req.body.issue_text } : {},
 							...req.body.created_by ? { created_by: req.body.created_by } : {},
 							...req.body.assigned_to ? { assigned_to: req.body.assigned_to } : {},
-							...req.body.status_text ? { status_text: req.body.status_text } : {}
+							...req.body.status_text ? { status_text: req.body.status_text } : {},
+							updated_on: new Date()
 					});
 					console.log(results);
 					res.json({
@@ -171,22 +172,28 @@ module.exports = function (app) {
     
 		.delete(async (req, res) => {
 			let project = req.params.project;
-			/*
+			
 			console.log('req.params.project: ',req.params.project);
 			console.log('req.params: ',req.params);
 			console.log('req.query: ',req.query);
 			console.log('req.body: ',req.body);
-			*/
-			try {
-				const results = await Issue.deleteOne({ _id: req.body._id});
-				console.log(results);
-				res.send(results);
-			} catch (err) {
-				console.log('Error - catch block');
-				res.json({
-					error: 'invalid input'
-				});
-			}
+		
+			if (!req.body._id) {
+				error: 'missing _id'
+			} else {
+				try {
+					const results = await Issue.deleteOne({ _id: req.body._id});
+					console.log(results);
+					res.json({
+						result: `successfully deleted', '_id': ${req.body._id}`
+					});
+				} catch (err) {
+					console.log('Error - catch block');
+					res.json({
+						error: `could not delete', '_id': ${req.body._id}`
+					});
+				}
+			};
       
 		})   
 };

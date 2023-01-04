@@ -5,6 +5,14 @@ Tracking
 - update PUT request to have correct error handling
 - update POST request to use if/else for better error handling
 - fix typo
+- see new replit test with FCC below
+- update error handling on DELETE function
+
+
+Failed: You can send a PUT request to /api/issues/{projectname} with an _id and one or more fields to update. On success, the updated_on field should be updated, and returned should be {  result: 'successfully updated', '_id': _id }.
+Failed: When the PUT request sent to /api/issues/{projectname} does not include update fields, the return value is { error: 'no update field(s) sent', '_id': _id }. On any other error, the return value is { error: 'could not update', '_id': _id }.
+Failed: You can send a DELETE request to /api/issues/{projectname} with an _id to delete an issue. If no _id is sent, the return value is { error: 'missing _id' }. On success, the return value is { result: 'successfully deleted', '_id': _id }. On failure, the return value is { error: 'could not delete', '_id': _id }.
+Failed: All 14 functional tests are complete and passing.
 
 
 12/30/22:
