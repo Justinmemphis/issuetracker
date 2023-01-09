@@ -1,6 +1,9 @@
 Issue Tracker
 Tracking
 
+01/09/23:
+- added new console logs to PUT function to catch routing through if else - failing same tests as below
+
 01/04/23:
 - update PUT request to have correct error handling
 - update POST request to use if/else for better error handling

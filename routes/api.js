@@ -134,6 +134,7 @@ module.exports = function (app) {
 			console.log('projectString3: ',projectString);
 			
 			if (!req.body._id) {
+				console.log('missing _id');
 				res.json({
 					error: 'missing _id'
 				});
@@ -143,10 +144,13 @@ module.exports = function (app) {
 				!req.body.assigned_to && 
 				!req.body.status_text) {
 
+				console.log('no update field(s) sent');
+
 				res.json({
 					error: `'no update field(s) sent', '_id': ${req.body._id}`
 				});
 			} else {
+				console.log('regular else condition');
 				try {
 					const results = await Issue.updateOne({ _id: req.body._id }, {
 							...req.body.issue_title ? { issue_title: req.body.issue_title } : {},
@@ -156,12 +160,13 @@ module.exports = function (app) {
 							...req.body.status_text ? { status_text: req.body.status_text } : {},
 							updated_on: new Date()
 					});
+					console.log('regular try condition');
 					console.log(results);
 					res.json({
 						result: `successfully updated', '_id': ${req.body._id}`
 					});
 				} catch (err) {
-					console.log('Error - catch block');
+					console.log('Error - catch block - put');
 					res.json({
 						error: `'could not update', '_id': ${req.body._id}`
 					});
