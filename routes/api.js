@@ -33,6 +33,7 @@ module.exports = function (app) {
 	app.route('/api/issues/:project')
   
 		.get(async (req, res) => {
+			console.log('GET request');
 			let project = req.params.project;
 			/*
 			console.log('req.params.project: ',req.params.project);
@@ -72,6 +73,7 @@ module.exports = function (app) {
 		})
     
 		.post(async (req, res) => {
+			console.log('POST request');
 			let project = req.params.project;
 		
 			console.log('req.params.project: ',req.params.project);
@@ -123,6 +125,7 @@ module.exports = function (app) {
 		})
     
 		.put(async (req, res) => {
+			console.log('PUT request');
 			let project = req.params.project;
 				
 			console.log('req.params.project: ',req.params.project);
@@ -176,6 +179,7 @@ module.exports = function (app) {
 		})
     
 		.delete(async (req, res) => {
+			console.log('DELETE request');
 			let project = req.params.project;
 			
 			console.log('req.params.project: ',req.params.project);
