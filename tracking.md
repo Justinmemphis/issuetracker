@@ -4,6 +4,7 @@ Tracking
 01/12/23:
 - remove old entries from database (see if it helps pass tests)
 - add additional console logs for requests
+- for github profile added own vercel instance to host github stats
 
 
 Replace myFirstDatabase with the name of the database that connections will use by default. You will be prompted for the password for the Database User, <username>. When entering your password, make sure all special characters are URL encoded.
